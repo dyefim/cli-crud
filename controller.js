@@ -30,6 +30,17 @@ const controller = () => {
     return [queryText, values];
   }
 
+  if (argv.done) {
+    const queryText = `
+      UPDATE list
+      SET done = true
+      WHERE id = $1`;
+
+    const values = [argv.done];
+
+    return [queryText, values];
+  }
+
   throw new Error('Invalid input');
 };
 
