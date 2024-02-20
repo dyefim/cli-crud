@@ -5,7 +5,18 @@ const argv = yargs(hideBin(process.argv)).argv;
 
 const controller = () => {
   if (argv.list) {
-    return ['SELECT name, done FROM list'];
+    const baseQuery = 'SELECT name, done FROM list';
+
+    switch (argv.list) {
+      case 'pending':
+        return [baseQuery + ' WHERE done = false'];
+
+      case 'done ':
+        return [baseQuery + ' WHERE done = true'];
+
+      default:
+        return [baseQuery];
+    }
   }
 
   if (argv.new) {
