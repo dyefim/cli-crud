@@ -41,6 +41,16 @@ const controller = () => {
     return [queryText, values];
   }
 
+  if (argv.delete) {
+    const queryText = `
+      DELETE FROM list
+      WHERE id = $1`;
+
+    const values = [argv.delete];
+
+    return [queryText, values];
+  }
+
   throw new Error('Invalid input');
 };
 
