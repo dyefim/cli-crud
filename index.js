@@ -1,19 +1,15 @@
-const readline = require('readline').createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-const GREETING_PARAM_KEY = '--greeting';
-
-let greeting = 'Hey there';
+require('dotenv').config();
+const pg = require('pg');
+const { Client } = pg;
 
 const args = process.argv.slice(2);
+const [, tableName] = args[0].match(/--table=(\S+)/);
 
-if (args[0].includes(GREETING_PARAM_KEY + '=')) {
-  greeting = args[0].replace(GREETING_PARAM_KEY + '=', '');
-}
+(async () => {
+  const client = new Client();
+  await client.connect();
 
-readline.question('Who are you? \n', (name) => {
-  console.log(`${greeting} ${name}!`);
-  readline.close();
-});
+  const res = await client.query(`SELECT * from ${tableName}`);
+  console.log(res.rows);
+  await client.end();
+})();
