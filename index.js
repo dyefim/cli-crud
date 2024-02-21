@@ -1,17 +1,26 @@
 require('dotenv').config();
 
-const controller = require('./controller');
 const pg = require('pg');
+const getQuery = require('./controller');
+const { getListQuery } = require('./queries');
+
 const { Client } = pg;
+const client = new Client();
 
 (async () => {
-  const client = new Client();
   await client.connect();
 
-  const query = controller();
+  try {
+    const res = await client.query(...getQuery());
 
-  const res = await client.query(...query);
+    if (res.rows.length) {
+      console.log(res.rows);
+    } else {
+      console.log('Nothing changed');
+    }
+  } catch {
+    console.error('Unexpected input.', 'Specify --help for available options');
+  }
 
-  console.log(res.rows);
   await client.end();
 })();

@@ -1,7 +1,4 @@
-const yargs = require('yargs/yargs');
-const { hideBin } = require('yargs/helpers');
-
-const argv = yargs(hideBin(process.argv)).argv;
+const argv = require('./args');
 
 const getNewQuery = () => {
   const queryText = `
@@ -15,7 +12,7 @@ const getNewQuery = () => {
 };
 
 const getListQuery = () => {
-  const baseQuery = 'SELECT name, done FROM list';
+  const baseQuery = 'SELECT id, name, done FROM list';
 
   switch (argv.list) {
     case 'pending':
@@ -33,7 +30,8 @@ const getDoneQuery = () => {
   const queryText = `
     UPDATE list
     SET done = true
-    WHERE id = $1`;
+    WHERE id = $1
+    RETURNING *`;
 
   const values = [argv.done];
 
@@ -43,7 +41,8 @@ const getDoneQuery = () => {
 const getDeleteQuery = () => {
   const queryText = `
     DELETE FROM list
-    WHERE id = $1`;
+    WHERE id = $1
+    RETURNING *`;
 
   const values = [argv.delete];
 

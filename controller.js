@@ -1,5 +1,3 @@
-const yargs = require('yargs/yargs');
-const { hideBin } = require('yargs/helpers');
 const {
   getNewQuery,
   getListQuery,
@@ -7,15 +5,11 @@ const {
   getDeleteQuery,
 } = require('./queries');
 
-const argv = yargs(hideBin(process.argv)).argv;
+const argv = require('./args');
 
 const controller = () => {
   if (argv.new) {
     return getNewQuery();
-  }
-
-  if (argv.list) {
-    return getListQuery();
   }
 
   if (argv.done) {
@@ -26,7 +20,7 @@ const controller = () => {
     return getDeleteQuery();
   }
 
-  throw new Error('Invalid input');
+  return getListQuery();
 };
 
 module.exports = controller;
