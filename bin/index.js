@@ -1,8 +1,9 @@
+#!/usr/local/bin/node
 require('dotenv').config();
 
 const pg = require('pg');
-const getQuery = require('./controller');
-const { getListQuery } = require('./queries');
+const getQuery = require('../controller');
+const { getListQuery } = require('../queries');
 
 const { Client } = pg;
 const client = new Client();
