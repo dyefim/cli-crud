@@ -8,23 +8,34 @@ const getNewQuery = () => {
     VALUES($1, $2)
     RETURNING id, name, done, ${DATE_STYLE};`;
 
-  const values = [argv.new, argv.tags];
+  const values = [
+    Array.isArray(argv.new) ? argv.new.join(' ') : argv.new,
+    argv.tags,
+  ];
 
   return [queryText, values];
 };
 
 const getListQuery = () => {
-  const baseQuery = 'SELECT id, name, done, tags::text[] FROM list';
+  let query = `
+    SELECT id, name, done, tags::text[]
+    FROM list`;
+
+  if (argv.tags) {
+    query += ` WHERE tags::text[] && ARRAY[${argv.tags.map(
+      (a) => "'" + a + "'"
+    )}]::text[]`;
+  }
 
   switch (argv.list) {
     case 'pending':
-      return [baseQuery + ' WHERE done = false'];
+      return [query + ' done = false'];
 
     case 'done':
-      return [baseQuery + ' WHERE done = true'];
+      return [query + ' done = true'];
 
     default:
-      return [baseQuery];
+      return [query];
   }
 };
 

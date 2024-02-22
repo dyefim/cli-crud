@@ -16,10 +16,11 @@ const argv = yargs(hideBin(process.argv))
     delete: 'Delete todo item by id',
     tags: 'Specify tag(s) for todo item',
   })
+  .array('new')
   .array('tags')
   .choices('list', ['all', 'done', 'pending'])
   .default('list', 'all')
-  .requiresArg(['new', 'done', 'delete'])
+  .requiresArg(['new', 'done', 'delete', 'tags'])
   .showHelpOnFail(false, 'Specify --help for available options');
 
 module.exports = argv.parse();
