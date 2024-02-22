@@ -2,8 +2,10 @@
 require('dotenv').config();
 
 const pg = require('pg');
+
 const getQuery = require('../controller');
 const { getListQuery } = require('../queries');
+const { formatTable } = require('../utils');
 
 const { Client } = pg;
 const client = new Client();
@@ -15,7 +17,7 @@ const client = new Client();
     const res = await client.query(...getQuery());
 
     if (res.rows.length) {
-      console.log(res.rows);
+      console.log(formatTable(res.rows));
     } else {
       console.log('Nothing changed');
     }

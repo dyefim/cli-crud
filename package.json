@@ -2,13 +2,14 @@
   "name": "crud-app",
   "version": "1.0.1",
   "main": "bin/index.js",
-  "bin": {  
-    "todo": "./bin/index.js"  
+  "bin": {
+    "todo": "./bin/index.js"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
     "node-postgres": "^0.6.2",
     "pg": "^8.11.3",
+    "text-table": "^0.2.0",
     "yargs": "^17.7.2"
   }
 }

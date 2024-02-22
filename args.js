@@ -2,7 +2,7 @@ const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 
 const argv = yargs(hideBin(process.argv))
-  .usage('Usage: node $0 <command> [options]')
+  .usage('Usage: todo <command> [options]')
   .alias({
     new: ['a', 'add'],
     done: ['d', 'check'],
