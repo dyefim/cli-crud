@@ -4,17 +4,17 @@ const DATE_STYLE = "TO_CHAR(created_at, 'Mon dd HH12:MI')";
 
 const getNewQuery = () => {
   const queryText = `
-    INSERT into list(name)
-    VALUES($1)
+    INSERT into list(name, tags)
+    VALUES($1, $2)
     RETURNING id, name, done, ${DATE_STYLE};`;
 
-  const values = [argv.new];
+  const values = [argv.new, argv.tags];
 
   return [queryText, values];
 };
 
 const getListQuery = () => {
-  const baseQuery = 'SELECT id, name, done FROM list';
+  const baseQuery = 'SELECT id, name, done, tags::text[] FROM list';
 
   switch (argv.list) {
     case 'pending':

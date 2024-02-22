@@ -7,13 +7,16 @@ const argv = yargs(hideBin(process.argv))
     new: ['a', 'add'],
     done: ['d', 'check'],
     delete: 'del',
+    tags: 'tag',
   })
   .describe({
     new: 'Create todo item with given name',
     list: 'List todo items',
     done: 'Mark todo item by id as done',
     delete: 'Delete todo item by id',
+    tags: 'Specify tag(s) for todo item',
   })
+  .array('tags')
   .choices('list', ['all', 'done', 'pending'])
   .default('list', 'all')
   .requiresArg(['new', 'done', 'delete'])

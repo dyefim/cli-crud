@@ -21,8 +21,8 @@ const client = new Client();
     } else {
       console.log('Nothing changed');
     }
-  } catch {
-    console.error('Unexpected input.', 'Specify --help for available options');
+  } catch (_error) {
+    console.error('Unexpected error.', 'Specify --help for available options');
   }
 
   await client.end();

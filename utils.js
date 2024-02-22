@@ -8,6 +8,11 @@ const formatTable = (rows) =>
           return '# ' + value;
         }
 
+        if (key === 'tags') {
+          console.log('tags -> ', value);
+          return value ? `[${value.join(', ')}]` : '';
+        }
+
         if (key === 'done') {
           return value ? '[x]' : '[ ]';
         }
