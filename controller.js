@@ -3,11 +3,11 @@ const {
   getListQuery,
   getDoneQuery,
   getDeleteQuery,
-} = require('./queries');
+} = require('./commands');
 
 const argv = require('./args');
 
-const controller = () => {
+const buildQuery = () => {
   if (argv.new) {
     return getNewQuery();
   }
@@ -23,4 +23,4 @@ const controller = () => {
   return getListQuery();
 };
 
-module.exports = controller;
+module.exports = { buildQuery };

@@ -21,4 +21,6 @@ const formatTable = (rows) =>
     )
   );
 
-module.exports = { formatTable };
+const DATE_STYLE = "TO_CHAR(created_at, 'Mon dd HH12:MI')";
+
+module.exports = { formatTable, DATE_STYLE };
