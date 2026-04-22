@@ -1,40 +1,16 @@
 # todo
 
-CLI todo app backed by Postgres.
+CLI todo app backed by Postgres (via Docker).
 
 ## Setup
 
-Requires Node.js and a running Postgres instance.
+Requires [Docker Desktop](https://docs.docker.com/get-docker/) and Node.js.
 
 ```sh
-npm install
-createdb todo
-psql -d todo <<'SQL'
-CREATE TABLE list (
-  id         SERIAL PRIMARY KEY,
-  name       TEXT NOT NULL,
-  done       BOOLEAN NOT NULL DEFAULT false,
-  tags       TEXT[],
-  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
-);
-SQL
+bash install.sh
 ```
 
-Create `.env` in the project root:
-
-```
-PGHOST=localhost
-PGPORT=5432
-PGUSER=your_user
-PGPASSWORD=your_password
-PGDATABASE=todo
-```
-
-Install the CLI globally:
-
-```sh
-npm link
-```
+Starts Docker if needed, launches Postgres, creates schema, installs deps, links the `todo` command globally. Container has `restart: unless-stopped`, so it auto-starts with Docker on future boots.
 
 ## Usage
 
@@ -47,4 +23,21 @@ todo --tag shop              # filter by tag
 todo --done 1                # mark item 1 done
 todo --del 1                 # delete item 1
 todo --help
+```
+
+## Lifecycle
+
+```sh
+bash start.sh          # start DB (and Docker if stopped)
+bash stop.sh           # stop DB, keep data
+bash uninstall.sh      # unlink CLI, remove container + volume (wipes data)
+```
+
+Low-level equivalents:
+
+```sh
+docker compose start         # start
+docker compose stop          # stop
+docker compose logs -f db    # tail logs
+docker compose down -v       # remove + wipe data
 ```
