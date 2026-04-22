@@ -3,24 +3,22 @@ const {
   getListQuery,
   getDoneQuery,
   getDeleteQuery,
-} = require('./commands');
+} = require("./commands");
 
-const argv = require('./args');
-
-const buildQuery = () => {
+const buildQuery = (argv) => {
   if (argv.new) {
-    return getNewQuery();
+    return getNewQuery(argv);
   }
 
   if (argv.done) {
-    return getDoneQuery();
+    return getDoneQuery(argv);
   }
 
   if (argv.delete) {
-    return getDeleteQuery();
+    return getDeleteQuery(argv);
   }
 
-  return getListQuery();
+  return getListQuery(argv);
 };
 
 module.exports = { buildQuery };

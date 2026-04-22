@@ -1,6 +1,4 @@
-const argv = require('../args');
-
-const getListQuery = () => {
+const getListQuery = (argv) => {
   let query = `
     SELECT id, name, done, tags::text[]
     FROM list`;

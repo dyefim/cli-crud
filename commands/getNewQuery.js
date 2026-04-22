@@ -1,7 +1,6 @@
-const argv = require('../args');
 const { DATE_STYLE } = require('../utils');
 
-const getNewQuery = () => {
+const getNewQuery = (argv) => {
   const queryText = `
     INSERT into list(name, tags)
     VALUES($1, $2)

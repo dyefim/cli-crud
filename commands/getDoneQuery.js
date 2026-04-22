@@ -1,7 +1,6 @@
-const argv = require('../args');
 const { DATE_STYLE } = require('../utils');
 
-const getDoneQuery = () => {
+const getDoneQuery = (argv) => {
   const queryText = `
     UPDATE list
     SET done = true

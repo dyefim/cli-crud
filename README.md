@@ -14,15 +14,20 @@ Starts Docker if needed, launches Postgres, creates schema, installs deps, links
 
 ## Usage
 
-```sh
-todo --add "buy milk" --tags shop errands
-todo --list                  # all
-todo --list pending          # pending only
-todo --list done             # completed only
-todo --tag shop              # filter by tag
-todo --done 1                # mark item 1 done
-todo --del 1                 # delete item 1
-todo --help
+Run `todo` to enter an interactive session. Commands use the same flags as a one-shot CLI:
+
+```
+$ todo
+todo session started. Type --help for options, exit / Ctrl-C to quit.
+todo> --add "buy milk" --tags shop errands
+todo> --list                  # all
+todo> --list pending          # pending only
+todo> --list done             # completed only
+todo> --tag shop              # filter by tag
+todo> --done 1                # mark item 1 done
+todo> --del 1                 # delete item 1
+todo> --help
+todo> exit                    # or Ctrl-C
 ```
 
 ## Lifecycle

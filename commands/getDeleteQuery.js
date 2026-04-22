@@ -1,7 +1,6 @@
-const argv = require('../args');
 const { DATE_STYLE } = require('../utils');
 
-const getDeleteQuery = () => {
+const getDeleteQuery = (argv) => {
   const queryText = `
     DELETE FROM list
     WHERE id = $1
